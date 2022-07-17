@@ -14,7 +14,8 @@
     "bulma": "^0.9.4",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
-    "vue-router": "^4.1.1"
+    "vue-router": "^4.1.1",
+    "vue-toast-notification": "^3.0.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.4",
