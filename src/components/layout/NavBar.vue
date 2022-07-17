@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { useStoreManageNoteModal } from "@/store";
+
+const { openModal }= useStoreManageNoteModal()
 
 const showNavBar = ref(false);
 </script>
@@ -7,9 +10,9 @@ const showNavBar = ref(false);
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-      </a>
+      <div class="navbar-item">
+        <h1 class="title is-3">Notius</h1>
+      </div>
 
       <a
         role="button"
@@ -30,8 +33,11 @@ const showNavBar = ref(false);
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <router-link class="navbar-item" active-class="is-active" to="/">Notes</router-link>
-            <router-link class="navbar-item" active-class="is-active" to="/stats">Stats</router-link>
+            <div class="field is-grouped">
+              <p class="control">
+                <button class="button" @click="openModal">New Note</button>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -39,10 +45,4 @@ const showNavBar = ref(false);
   </nav>
 </template>
 
-<style scoped>
-@media (max-width: 1023px) {
-  .box.mt-4 {
-    margin-top: 0 !important;
-  }
-}
-</style>
+<style scoped></style>

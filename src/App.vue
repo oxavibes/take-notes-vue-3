@@ -1,12 +1,15 @@
 <script setup>
+import { ref } from "vue";
+
 import NavBar from "@/components/layout/NavBar.vue";
 import Footer from "@/components/layout/Footer.vue";
+
 </script>
 
 <template>
   <div class="container is-max-desktop is-flex is-flex-direction-column site">
     <header class="block">
-      <div class="box mt-4">
+      <div class="box">
         <NavBar />
       </div>
     </header>

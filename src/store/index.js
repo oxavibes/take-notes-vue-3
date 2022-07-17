@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
-      openModal: false,
       notes: [],
+      selectedNote: { title: "", message: "" },
     };
   },
   actions: {
@@ -14,23 +14,23 @@ export const useStoreNotes = defineStore("storeNotes", {
       let note = {
         id,
         title,
-        message
+        message,
       };
 
       this.notes.unshift(note);
     },
-    deleteNote(id) {
-      this.notes = this.notes.filter((note) => note.id !== id);
+    updateNote(updatedNote) {
+      let index = this.notes.findIndex((note) => note.id === this.selectedNote.id);
+      this.notes[index] = updatedNote;
     },
-    updateNote(id, content) {
-      let index = this.notes.findIndex((note) => note.id === id);
-      this.notes[index].content = content;
+    deleteNote() {
+      this.notes = this.notes.filter((note) => note.id !== this.selectedNote.id);
     },
-    showModal() {
-      this.openModal = true;
+    updateSelectedNote(selectedNote) {
+      this.selectedNote = selectedNote;
     },
-    hideModal() {
-      this.openModal = false;
+    clearSelected() {
+      this.selectedNote = { title: "", message: "" };
     },
   },
   getters: {
@@ -42,10 +42,44 @@ export const useStoreNotes = defineStore("storeNotes", {
     totalNotesCount: (state) => {
       return state.notes.length;
     },
-    totalCharactersCount: (state) => {
+    /*totalCharactersCount: (state) => {
       let count = state.notes.reduce((previousValue, currentValue) => previousValue.content.length + currentValue.content.length, 0);
 
       return count;
+    },*/
+  },
+});
+
+export const useStoreManageNoteModal = defineStore("storeManageNoteModal", {
+  state: () => {
+    return {
+      isOpen: false,
+      isUpdate: false,
+    };
+  },
+  actions: {
+    openModal() {
+      this.isOpen = true;
+    },
+    closeModal() {
+      this.isOpen = false;
+      this.isUpdate = false;
+    },
+  },
+});
+
+export const useStoreDeleteNoteModal = defineStore("storeDeleteNoteModal", {
+  state: () => {
+    return {
+      isOpen: false,
+    };
+  },
+  actions: {
+    openModal() {
+      this.isOpen = true;
+    },
+    closeModal() {
+      this.isOpen = false;
     },
   },
 });

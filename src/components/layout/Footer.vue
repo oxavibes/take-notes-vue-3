@@ -7,7 +7,7 @@ const currentYear = computed(() => {
 </script>
 
 <template>
-  <footer class="box mb-4">
+  <footer class="box">
     <div class="content has-text-centered">
       <p><strong>Notius</strong> &copy; Stefano Bozzi - {{ currentYear }}</p>
     </div>
@@ -15,9 +15,4 @@ const currentYear = computed(() => {
 </template>
 
 <style scoped>
-@media (max-width: 1023px) {
-  footer.mb-4 {
-    margin-bottom: 0 !important
-  }
-}
 </style>
