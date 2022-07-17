@@ -24,7 +24,6 @@ const form = ref(null);
 const note = selectedNote.value
 
 let title = computed(() => (!isUpdate.value ? "Add Note" : "Edit Note"));
-let fieldsAreEmpty = computed(() => note.title === "" || note.message== "");
 
 const resetInputs = () => {
   selectedNote.value.title = "";
@@ -67,7 +66,7 @@ const onSubmit = () => {
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input v-model="selectedNote.title" class="input" type="text" placeholder="e.g. Title" />
+                  <input v-model="selectedNote.title" class="input" type="text" placeholder="e.g. Title" required/>
                 </div>
               </div>
             </div>
@@ -80,7 +79,7 @@ const onSubmit = () => {
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <textarea v-model="selectedNote.message" class="textarea" placeholder="Explain how we can help you"></textarea>
+                  <textarea v-model="selectedNote.message" class="textarea" placeholder="Explain how we can help you" required></textarea>
                 </div>
               </div>
             </div>
@@ -89,8 +88,8 @@ const onSubmit = () => {
         <footer class="modal-card-foot">
           <div class="field is-grouped is-grouped-right">
             <p class="control">
-              <button class="button" v-if="!isUpdate" :disabled="fieldsAreEmpty">Add</button>
-              <button class="button" v-else :disabled="fieldsAreEmpty">Edit</button>
+              <button class="button" v-if="!isUpdate">Add</button>
+              <button class="button" v-else>Edit</button>
             </p>
           </div>
         </footer>
