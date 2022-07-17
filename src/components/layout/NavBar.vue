@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useStoreManageNoteModal } from "@/store";
 
-const { openModal }= useStoreManageNoteModal()
+const { openModal } = useStoreManageNoteModal();
 
 const showNavBar = ref(false);
 </script>

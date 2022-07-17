@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useStoreNotes } from "@/store";
-import supabase from "@/utils/supabase";
+// import supabase from "@/utils/supabase";
 import { useBreakpoints } from "@vueuse/core";
 
 import CardNote from "@/components/cards/CardNote.vue";
