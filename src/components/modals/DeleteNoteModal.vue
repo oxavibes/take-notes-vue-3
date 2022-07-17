@@ -1,5 +1,6 @@
 <script setup>
 import { useStoreDeleteNoteModal } from "@/store";
+import { useToast } from "vue-toast-notification";
 
 const props = defineProps({
   title: {
@@ -19,7 +20,11 @@ const props = defineProps({
 const storeDeleteNoteModal = useStoreDeleteNoteModal();
 
 const onSubmit = () => {
+  const $toast = useToast();
+
   props.onDelete();
+
+  $toast.default("Note deleted successfully!");
 
   storeDeleteNoteModal.closeModal();
 };

@@ -1,6 +1,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { ref, reactive, computed } from "vue";
+import { useToast } from "vue-toast-notification";
 import { useStoreNotes, useStoreManageNoteModal } from "@/store";
 
 const props = defineProps({
@@ -38,10 +39,15 @@ const onClose = () => {
 };
 
 const onSubmit = () => {
+  const $toast = useToast();
   if (!isUpdate.value) {
     props.onAdd(Object.assign({}, selectedNote.value));
+
+    $toast.default('Note added successfully!');
   } else {
     props.onUpdate(Object.assign({}, selectedNote.value));
+
+    $toast.default('Note updated successfully!');
   }
 
   resetInputs();

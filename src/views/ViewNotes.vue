@@ -26,7 +26,7 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
 
 <template>
   <div class="container is-max-desktop">
-    <section :class="tabletAndSmaller ? 'section': ''">
+    <section :class="tabletAndSmaller ? 'section' : ''">
       <div class="columns is-multiline" v-if="notes.length">
         <div class="column is-12-mobile is-6-tablet" v-for="(note, index) in notes">
           <CardNote :key="note.id" :note="note" />
