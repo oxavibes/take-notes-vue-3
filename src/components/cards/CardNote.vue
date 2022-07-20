@@ -1,6 +1,6 @@
 <script setup>
-import { useStoreNotes, useStoreManageNoteModal, useStoreDeleteNoteModal } from "@/store";
 import { useFormatDateDay } from "@/composables/useFormatDay";
+import { useStoreNotes, useStoreManageNoteModal, useStoreDeleteNoteModal } from "@/store";
 
 const { date } = useFormatDateDay();
 
@@ -26,10 +26,11 @@ const onEdit = () => {
 };
 
 const onDelete = () => {
-  updateSelectedNote(Object.assign({}, {id: props.note.id}));
+  updateSelectedNote(Object.assign({}, { id: props.note.id }));
 
   storeDeleteNoteModal.openModal();
 };
+
 </script>
 
 <template>

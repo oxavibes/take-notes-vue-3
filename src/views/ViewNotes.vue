@@ -27,13 +27,21 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
 <template>
   <div class="container is-max-desktop">
     <section :class="tabletAndSmaller ? 'section' : ''">
-      <div class="columns is-multiline" v-if="notes.length">
-        <div class="column is-12-mobile is-6-tablet" v-for="(note, index) in notes">
+      <TransitionGroup
+        class="columns is-multiline"
+        name="custom-classes"
+        tag="div"
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+      >
+        <div class="column is-12-mobile is-6-tablet" v-for="(note, index) in notes" :key="note.id">
           <CardNote :key="note.id" :note="note" />
         </div>
-      </div>
+      </TransitionGroup>
 
-      <p v-else class="has-text-centered has-text-weight-semibold notification">There are not notes to show</p>
+      <Transition name="custom-classes" enter-active-class="animate__animated animate__fadeIn animate__delay-1s">
+        <p v-show="!notes.length" class="has-text-centered has-text-weight-semibold notification">No data to show</p>
+      </Transition>
     </section>
   </div>
 
