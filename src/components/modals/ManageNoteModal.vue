@@ -22,36 +22,33 @@ const { isUpdate, isOpen } = storeToRefs(storeManageNoteModal);
 const { openModal, closeModal } = storeManageNoteModal;
 
 const form = ref(null);
-const note = selectedNote.value
+const note = selectedNote.value;
 
-let title = computed(() => (!isUpdate.value ? "Add Note" : "Edit Note"));
-
-const resetInputs = () => {
+const onClose = () => {
   selectedNote.value.title = "";
   selectedNote.value.message = "";
 
-  form.value.reset();
-};
-
-const onClose = () => {
-  resetInputs();
   closeModal();
 };
 
-const onSubmit = () => {
+const onAdd = () => {
   const $toast = useToast();
-  if (!isUpdate.value) {
-    props.onAdd(Object.assign({}, selectedNote.value));
 
-    $toast.default('Note added successfully!');
-  } else {
-    props.onUpdate(Object.assign({}, selectedNote.value));
+  props.onAdd(Object.assign({}, selectedNote.value));
 
-    $toast.default('Note updated successfully!');
-  }
+  $toast.default("Note added successfully!");
 
-  resetInputs();
-  closeModal();
+  onClose()
+};
+
+const onUpdate = () => {
+  const $toast = useToast();
+
+  props.onUpdate(Object.assign({}, selectedNote.value));
+
+  $toast.default("Note updated successfully!");
+
+  onClose()
 };
 </script>
 
@@ -59,9 +56,9 @@ const onSubmit = () => {
   <div class="modal" :class="isOpen ? 'is-active' : ''">
     <div class="modal-background"></div>
     <div class="modal-card">
-      <form ref="form" @submit.prevent="onSubmit">
+      <form ref="form">
         <header class="modal-card-head">
-          <p class="modal-card-title">{{ title }}</p>
+          <p class="modal-card-title">Note details</p>
           <a class="delete" aria-label="close" @click="onClose"></a>
         </header>
         <section class="modal-card-body">
@@ -72,7 +69,7 @@ const onSubmit = () => {
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input v-model="selectedNote.title" class="input" type="text" placeholder="e.g. Title" required/>
+                  <input v-model="selectedNote.title" class="input" type="text" placeholder="Tame your work, organize your life" required />
                 </div>
               </div>
             </div>
@@ -85,17 +82,27 @@ const onSubmit = () => {
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <textarea v-model="selectedNote.message" class="textarea" placeholder="Explain how we can help you" required></textarea>
+                  <textarea
+                    v-model="selectedNote.message"
+                    class="textarea"
+                    placeholder="Remember everything and tackle any project with your notes, tasks, and schedule all in one place."
+                    required
+                  ></textarea>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <footer class="modal-card-foot">
+        <footer class="modal-card-foot is-justify-content-flex-end">
           <div class="field is-grouped is-grouped-right">
             <p class="control">
-              <button class="button" v-if="!isUpdate">Add</button>
-              <button class="button" v-else>Edit</button>
+              <a class="button" @click="onClose">Cancel</a>
+            </p>
+            <p class="control" v-if="!isUpdate">
+              <a class="button is-link" @click="onAdd">Add</a>
+            </p>
+            <p class="control" v-else>
+              <a class="button is-link" @click="onUpdate">Update</a>
             </p>
           </div>
         </footer>
@@ -105,10 +112,10 @@ const onSubmit = () => {
 </template>
 
 <style scoped>
-@media screen and (min-width: 769px) {
+@media screen and (max-width: 769px) {
   .modal-card,
   .modal-content {
-    width: 500px;
+    max-width: 300px;
   }
 }
 </style>

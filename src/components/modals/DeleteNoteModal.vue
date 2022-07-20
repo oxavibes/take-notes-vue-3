@@ -1,4 +1,5 @@
 <script setup>
+import { storeToRefs } from "pinia";
 import { useStoreDeleteNoteModal } from "@/store";
 import { useToast } from "vue-toast-notification";
 
@@ -19,34 +20,40 @@ const props = defineProps({
 
 const storeDeleteNoteModal = useStoreDeleteNoteModal();
 
-const onSubmit = () => {
+const { closeModal } = storeDeleteNoteModal;
+const { isOpen } = storeToRefs(storeDeleteNoteModal);
+
+const onDelete = () => {
   const $toast = useToast();
 
   props.onDelete();
 
   $toast.default("Note deleted successfully!");
 
-  storeDeleteNoteModal.closeModal();
+  closeModal();
 };
 </script>
 
 <template>
   <Teleport to="body">
-    <div class="modal" :class="storeDeleteNoteModal.isOpen ? 'is-active' : ''">
+    <div class="modal" :class="isOpen ? 'is-active' : ''">
       <div class="modal-background"></div>
       <div class="modal-card">
-        <form @submit.prevent="onSubmit">
+        <form>
           <header class="modal-card-head">
             <p class="modal-card-title">{{ title }}</p>
-            <a class="delete" aria-label="close" @click="storeDeleteNoteModal.closeModal"></a>
+            <a class="delete" aria-label="close" @click="closeModal"></a>
           </header>
           <section class="modal-card-body">
             <p>{{ text }}</p>
           </section>
-          <footer class="modal-card-foot">
+          <footer class="modal-card-foot is-justify-content-flex-end">
             <div class="field is-grouped is-grouped-right">
               <p class="control">
-                <button class="button is-danger">Delete</button>
+                <a class="button" @click="closeModal">Cancel</a>
+              </p>
+              <p class="control">
+                <a class="button is-link" @click="onDelete">Delete</a>
               </p>
             </div>
           </footer>
@@ -63,4 +70,5 @@ const onSubmit = () => {
     width: 450px;
   }
 }
+
 </style>
