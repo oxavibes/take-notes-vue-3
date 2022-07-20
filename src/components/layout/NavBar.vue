@@ -35,7 +35,7 @@ const showNavBar = ref(false);
           <div class="buttons">
             <div class="field is-grouped">
               <p class="control">
-                <button class="button" @click="openModal">New Note</button>
+                <button class="button" @click="openModal"><font-awesome-icon icon="fa-regular fa-square-plus" /></button>
               </p>
             </div>
           </div>

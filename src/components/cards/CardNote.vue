@@ -51,8 +51,8 @@ const onDelete = () => {
         </div>
       </div>
       <footer class="card-footer">
-        <a href="#" class="card-footer-item has-text-info-dark" @click="onEdit">Edit</a>
-        <a href="#" class="card-footer-item has-text-danger" @click="onDelete">Delete</a>
+        <a href="#" class="card-footer-item has-text-info-dark" @click="onEdit"><font-awesome-icon icon="fa-regular fa-pen-to-square" /></a>
+        <a href="#" class="card-footer-item has-text-danger" @click="onDelete"><font-awesome-icon icon="fa-regular fa-trash-can" /></a>
       </footer>
     </div>
   </div>
