@@ -24,6 +24,7 @@ import Footer from "@/components/layout/Footer.vue";
 
 <style>
 @import "bulma/css/bulma.min.css";
+@import 'animate.css';
 
 .site {
   min-height: 100vh;
