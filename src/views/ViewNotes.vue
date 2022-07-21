@@ -3,7 +3,6 @@ import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useStoreNotes } from "@/store";
 // import supabase from "@/utils/supabase";
-import { useBreakpoints } from "@vueuse/core";
 
 import CardNote from "@/components/cards/CardNote.vue";
 import ManageNoteModal from "@/components/modals/ManageNoteModal.vue";
@@ -12,21 +11,11 @@ import DeleteNoteModal from "@/components/modals/DeleteNoteModal.vue";
 const storeNotes = useStoreNotes();
 const { notes, selectedNote } = storeToRefs(storeNotes);
 const { addNote, updateNote, updateSelectedNote, deleteNote } = storeNotes;
-
-const breakpoints = useBreakpoints({
-  mobile: 768,
-  tablet: 769,
-  desktop: 1024,
-  widescreen: 1216,
-  fullhd: 1408,
-});
-
-const tabletAndSmaller = breakpoints.smaller("desktop");
 </script>
 
 <template>
   <div class="container is-max-desktop">
-    <section :class="tabletAndSmaller ? 'section' : ''">
+    <section class="mx-5">
       <TransitionGroup
         class="columns is-multiline"
         name="custom-classes"
