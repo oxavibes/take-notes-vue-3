@@ -39,7 +39,7 @@ const onSubmit = () => {
       <div class="modal-card">
         <form @submit.prevent="onSubmit">
           <header class="modal-card-head">
-            <p class="modal-card-title">{{ title }}</p>
+            <p class="modal-card-title is-size-5 has-text-weight-bold">{{ title }}</p>
             <a class="delete" aria-label="close" @click="closeModal"></a>
           </header>
           <section class="modal-card-body">
@@ -48,10 +48,10 @@ const onSubmit = () => {
           <footer class="modal-card-foot is-justify-content-flex-end">
             <div class="field is-grouped is-grouped-right">
               <p class="control">
-                <a class="button" @click="closeModal">Cancel</a>
+                <a class="button is-small" @click="closeModal">Cancel</a>
               </p>
               <p class="control">
-                <button class="button is-link">Delete</button>
+                <button class="button is-info is-small">Delete</button>
               </p>
             </div>
           </footer>
@@ -62,10 +62,10 @@ const onSubmit = () => {
 </template>
 
 <style scoped>
-@media screen and (min-width: 468px) {
+@media screen and (max-width: 769px) {
   .modal-card,
   .modal-content {
-    width: 450px;
+    max-width: 300px;
   }
 }
 </style>

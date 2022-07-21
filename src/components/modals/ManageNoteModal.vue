@@ -26,7 +26,7 @@ const note = selectedNote.value;
 const onSubmit = (e) => {
   const action = e.submitter.value;
 
-  const actions = { onAdd, onUpdate};
+  const actions = { onAdd, onUpdate };
 
   actions[action]();
 };
@@ -65,7 +65,7 @@ const onUpdate = () => {
     <div class="modal-card">
       <form ref="form" @submit.prevent="onSubmit">
         <header class="modal-card-head">
-          <p class="modal-card-title">Note details</p>
+          <p class="modal-card-title is-size-5 has-text-weight-bold">Note details</p>
           <a class="delete" aria-label="close" @click="onClose"></a>
         </header>
         <section class="modal-card-body">
@@ -103,13 +103,13 @@ const onUpdate = () => {
         <footer class="modal-card-foot is-justify-content-flex-end">
           <div class="field is-grouped is-grouped-right">
             <p class="control">
-              <a class="button" @click="onClose">Cancel</a>
+              <a class="button is-small" @click="onClose">Cancel</a>
             </p>
             <p class="control" v-if="!isUpdate">
-              <button class="button is-link" name="action" value="onAdd">Add</button>
+              <button class="button is-info is-small" name="action" value="onAdd">Add</button>
             </p>
             <p class="control" v-else>
-              <button class="button is-link" name="action" value="onUpdate">Update</button>
+              <button class="button is-info is-small" name="action" value="onUpdate">Update</button>
             </p>
           </div>
         </footer>
