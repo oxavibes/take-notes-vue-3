@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "@vue/reactivity";
+import { storeToRefs } from "pinia";
 import { useFormatDateDay } from "@/composables/useFormatDay";
 import { useStoreNotes, useStoreManageNoteModal, useStoreDeleteNoteModal } from "@/store";
 
@@ -11,29 +12,32 @@ const props = defineProps({
 });
 
 const messageCharLength = computed(() => {
-  const { length } = props.note.message;
-  return length > 1 ? `${length} caracters` : `${length} caracter`;
+  return props.note.message.length > 1 ? 
+  `${props.note.message.length} caracters` : 
+  `${props.note.message.length} caracter`;
 });
 
 const { date } = useFormatDateDay();
 
-const storeManageNoteModal = useStoreManageNoteModal();
-const storeDeleteNoteModal = useStoreDeleteNoteModal();
-
-const { updateSelectedNote, deleteNote } = useStoreNotes();
+const { updateSelectedNote } = useStoreNotes();
 
 const onEdit = () => {
+  const { openModal } = useStoreManageNoteModal();
+  const { isUpdate } = storeToRefs(useStoreManageNoteModal());
+
   updateSelectedNote(Object.assign({}, props.note));
 
-  storeManageNoteModal.isUpdate = true;
+  isUpdate.value = true;
 
-  storeManageNoteModal.openModal();
+  openModal();
 };
 
 const onDelete = () => {
+  const { openModal } = useStoreDeleteNoteModal();
+
   updateSelectedNote(Object.assign({}, { id: props.note.id }));
 
-  storeDeleteNoteModal.openModal();
+  openModal();
 };
 </script>
 
@@ -53,7 +57,7 @@ const onDelete = () => {
           <p>{{ props.note.message }}</p>
         </div>
         <div class="is-flex is-justify-content-space-between">
-          <p class="is-size-7 has-text-weight-bold">{{ messageCharLength  }}</p>
+          <p class="is-size-7 has-text-weight-bold">{{ messageCharLength }}</p>
           <p class="is-size-7 has-text-weight-bold">{{ date }}</p>
         </div>
       </div>

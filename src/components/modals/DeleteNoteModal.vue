@@ -1,30 +1,16 @@
 <script setup>
 import { storeToRefs } from "pinia";
-import { useStoreDeleteNoteModal } from "@/store";
+import { useStoreNotes, useStoreDeleteNoteModal } from "@/store";
 import { useToast } from "vue-toast-notification";
-
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  text: {
-    type: String,
-    required: true,
-  },
-  onDelete: {
-    type: Function,
-    required: true,
-  },
-});
 
 const { closeModal } = useStoreDeleteNoteModal();
 const { isOpen } = storeToRefs(useStoreDeleteNoteModal());
 
 const onSubmit = () => {
   const $toast = useToast();
+  const { deleteNote } = useStoreNotes();
 
-  props.onDelete();
+  deleteNote();
 
   $toast.default("Note deleted successfully!", {
     queue: true,
@@ -41,11 +27,11 @@ const onSubmit = () => {
       <div class="modal-card">
         <form @submit.prevent="onSubmit">
           <header class="modal-card-head">
-            <p class="modal-card-title is-size-5 has-text-weight-bold">{{ title }}</p>
+            <p class="modal-card-title is-size-5 has-text-weight-bold">Delete note</p>
             <a class="delete" aria-label="close" @click="closeModal"></a>
           </header>
           <section class="modal-card-body">
-            <p>{{ text }}</p>
+            <p>Are you sure to delete this note?</p>
           </section>
           <footer class="modal-card-foot is-justify-content-flex-end">
             <div class="field is-grouped is-grouped-right">

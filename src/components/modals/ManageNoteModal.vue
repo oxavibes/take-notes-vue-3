@@ -7,8 +7,6 @@ import { useStoreNotes, useStoreManageNoteModal } from "@/store";
 const { selectedNote } = storeToRefs(useStoreNotes());
 const { addNote, updateNote, deleteNote } = useStoreNotes();
 
-const form = ref(null);
-
 const { openModal, closeModal } = useStoreManageNoteModal();
 const { isUpdate, isOpen } = storeToRefs(useStoreManageNoteModal());
 
@@ -56,7 +54,7 @@ const onUpdate = () => {
   <div class="modal" :class="isOpen ? 'is-active' : ''">
     <div class="modal-background"></div>
     <div class="modal-card">
-      <form ref="form" @submit.prevent="onSubmit">
+      <form @submit.prevent="onSubmit">
         <header class="modal-card-head">
           <p class="modal-card-title is-size-5 has-text-weight-bold">Note details</p>
           <a class="delete" aria-label="close" @click="onClose"></a>

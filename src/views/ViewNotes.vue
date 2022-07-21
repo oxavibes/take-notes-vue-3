@@ -9,9 +9,7 @@ import CardNote from "@/components/cards/CardNote.vue";
 import ManageNoteModal from "@/components/modals/ManageNoteModal.vue";
 import DeleteNoteModal from "@/components/modals/DeleteNoteModal.vue";
 
-const storeNotes = useStoreNotes();
-const { notes, selectedNote } = storeToRefs(storeNotes);
-const { updateSelectedNote, deleteNote } = storeNotes;
+const { notes } = storeToRefs(useStoreNotes());
 
 const breakpoints = useBreakpoints({
   mobile: 768,
@@ -27,12 +25,7 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
 <template>
   <div class="container is-max-desktop">
     <section :class="tabletAndSmaller ? 'mx-5' : ''">
-      <TransitionGroup
-        class="columns is-multiline"
-        name="custom-classes"
-        tag="div"
-        enter-active-class="animate__animated animate__fadeIn"
-      >
+      <TransitionGroup class="columns is-multiline" name="custom-classes" tag="div" enter-active-class="animate__animated animate__fadeIn">
         <div class="column is-12-mobile is-6-tablet" v-for="(note, index) in notes" :key="note.id">
           <CardNote :key="note.id" :note="note" />
         </div>
@@ -45,7 +38,7 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
   </div>
 
   <ManageNoteModal />
-  <DeleteNoteModal title="Delete note" text="Are you sure to delete this note?" :onDelete="deleteNote" />
+  <DeleteNoteModal />
 </template>
 
 <style scoped>

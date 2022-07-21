@@ -17,7 +17,7 @@ const desktopAndGreater = breakpoints.greater("desktop");
 </script>
 
 <template>
-  <div class="container is-max-desktop is-flex is-flex-direction-column site">
+  <div class="container is-max-desktop is-flex is-flex-direction-column is-full-height">
     <header class="block box" :class="desktopAndGreater ? 'mt-2' : ''">
       <NavBar />
     </header>
@@ -31,10 +31,10 @@ const desktopAndGreater = breakpoints.greater("desktop");
 </template>
 
 <style>
-@import "bulma/css/bulma.min.css";
 @import "animate.css";
+@import "bulma/css/bulma.min.css";
 
-.site {
+.is-full-height {
   min-height: 100vh;
 }
 </style>
