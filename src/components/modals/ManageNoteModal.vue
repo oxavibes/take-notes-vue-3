@@ -119,10 +119,17 @@ const onUpdate = () => {
 </template>
 
 <style scoped>
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 768px) {
   .modal-card,
   .modal-content {
     max-width: 300px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .modal-card,
+  .modal-content {
+    max-width: 600px;
   }
 }
 </style>
