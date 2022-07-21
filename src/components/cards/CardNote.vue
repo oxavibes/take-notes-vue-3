@@ -1,14 +1,7 @@
 <script setup>
+import { computed } from "@vue/reactivity";
 import { useFormatDateDay } from "@/composables/useFormatDay";
 import { useStoreNotes, useStoreManageNoteModal, useStoreDeleteNoteModal } from "@/store";
-
-const { date } = useFormatDateDay();
-
-const storeNotes = useStoreNotes();
-const storeManageNoteModal = useStoreManageNoteModal();
-const storeDeleteNoteModal = useStoreDeleteNoteModal();
-
-const { updateSelectedNote, deleteNote } = storeNotes;
 
 const props = defineProps({
   note: {
@@ -16,6 +9,18 @@ const props = defineProps({
     required: true,
   },
 });
+
+const messageCharLength = computed(() => {
+  const { length } = props.note.message;
+  return length > 1 ? `${length} caracters` : `${length} caracter`;
+});
+
+const { date } = useFormatDateDay();
+
+const storeManageNoteModal = useStoreManageNoteModal();
+const storeDeleteNoteModal = useStoreDeleteNoteModal();
+
+const { updateSelectedNote, deleteNote } = useStoreNotes();
 
 const onEdit = () => {
   updateSelectedNote(Object.assign({}, props.note));
@@ -44,9 +49,12 @@ const onDelete = () => {
         </button>
       </header>
       <div class="card-content">
-        <div class="content">
+        <div class="content has-text-grey">
           <p>{{ props.note.message }}</p>
-          <p class="is-size-7 has-text-right has-text-weight-medium">{{ date }}</p>
+        </div>
+        <div class="is-flex is-justify-content-space-between">
+          <p class="is-size-7 has-text-weight-bold">{{ messageCharLength  }}</p>
+          <p class="is-size-7 has-text-weight-bold">{{ date }}</p>
         </div>
       </div>
       <footer class="card-footer">

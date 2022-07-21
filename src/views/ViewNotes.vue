@@ -11,7 +11,7 @@ import DeleteNoteModal from "@/components/modals/DeleteNoteModal.vue";
 
 const storeNotes = useStoreNotes();
 const { notes, selectedNote } = storeToRefs(storeNotes);
-const { addNote, updateNote, updateSelectedNote, deleteNote } = storeNotes;
+const { updateSelectedNote, deleteNote } = storeNotes;
 
 const breakpoints = useBreakpoints({
   mobile: 768,
@@ -44,7 +44,7 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
     </section>
   </div>
 
-  <ManageNoteModal :onAdd="addNote" :onUpdate="updateNote" />
+  <ManageNoteModal />
   <DeleteNoteModal title="Delete note" text="Are you sure to delete this note?" :onDelete="deleteNote" />
 </template>
 

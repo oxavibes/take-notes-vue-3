@@ -4,24 +4,13 @@ import { storeToRefs } from "pinia";
 import { useToast } from "vue-toast-notification";
 import { useStoreNotes, useStoreManageNoteModal } from "@/store";
 
-const props = defineProps({
-  onAdd: {
-    type: Function,
-    required: true,
-  },
-  onUpdate: {
-    type: Function,
-    required: false,
-  },
-});
+const { selectedNote } = storeToRefs(useStoreNotes());
+const { addNote, updateNote, deleteNote } = useStoreNotes();
 
 const form = ref(null);
 
 const { openModal, closeModal } = useStoreManageNoteModal();
 const { isUpdate, isOpen } = storeToRefs(useStoreManageNoteModal());
-
-const { selectedNote } = storeToRefs(useStoreNotes());
-const note = selectedNote.value;
 
 const onSubmit = (e) => {
   const action = e.submitter.value;
@@ -41,7 +30,7 @@ const onClose = () => {
 const onAdd = () => {
   const $toast = useToast();
 
-  props.onAdd(Object.assign({}, selectedNote.value));
+  addNote(Object.assign({}, selectedNote.value));
 
   $toast.default("Note added successfully!", {
     queue: true,
@@ -53,7 +42,7 @@ const onAdd = () => {
 const onUpdate = () => {
   const $toast = useToast();
 
-  props.onUpdate(Object.assign({}, selectedNote.value));
+  updateNote(Object.assign({}, selectedNote.value));
 
   $toast.default("Note updated successfully!", {
     queue: true,
