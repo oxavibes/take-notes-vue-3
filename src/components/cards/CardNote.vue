@@ -30,7 +30,6 @@ const onDelete = () => {
 
   storeDeleteNoteModal.openModal();
 };
-
 </script>
 
 <template>

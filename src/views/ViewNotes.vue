@@ -32,14 +32,13 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
         name="custom-classes"
         tag="div"
         enter-active-class="animate__animated animate__fadeIn"
-        leave-active-class="animate__animated animate__fadeOut"
       >
         <div class="column is-12-mobile is-6-tablet" v-for="(note, index) in notes" :key="note.id">
           <CardNote :key="note.id" :note="note" />
         </div>
       </TransitionGroup>
 
-      <Transition name="custom-classes" enter-active-class="animate__animated animate__fadeIn animate__delay-1s">
+      <Transition name="custom-classes" enter-active-class="animate__animated animate__fadeIn">
         <p v-show="!notes.length" class="has-text-centered has-text-weight-semibold notification">No data to show</p>
       </Transition>
     </section>
