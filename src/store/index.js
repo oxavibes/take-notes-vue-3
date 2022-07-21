@@ -29,9 +29,6 @@ export const useStoreNotes = defineStore("storeNotes", {
     updateSelectedNote(selectedNote) {
       this.selectedNote = selectedNote;
     },
-    clearSelected() {
-      this.selectedNote = { title: "", message: "" };
-    },
   },
   getters: {
     getNoteContent: (state) => {
@@ -82,4 +79,5 @@ export const useStoreDeleteNoteModal = defineStore("storeDeleteNoteModal", {
       this.isOpen = false;
     },
   },
+  persist: true
 });

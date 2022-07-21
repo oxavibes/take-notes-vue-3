@@ -18,10 +18,8 @@ const props = defineProps({
   },
 });
 
-const storeDeleteNoteModal = useStoreDeleteNoteModal();
-
-const { closeModal } = storeDeleteNoteModal;
-const { isOpen } = storeToRefs(storeDeleteNoteModal);
+const { closeModal } = useStoreDeleteNoteModal();
+const { isOpen } = storeToRefs(useStoreDeleteNoteModal());
 
 const onSubmit = () => {
   const $toast = useToast();

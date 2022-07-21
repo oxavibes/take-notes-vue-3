@@ -1,6 +1,6 @@
 <script setup>
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { ref, reactive, computed } from "vue";
 import { useToast } from "vue-toast-notification";
 import { useStoreNotes, useStoreManageNoteModal } from "@/store";
 
@@ -14,23 +14,19 @@ const props = defineProps({
     required: false,
   },
 });
-const storeNotes = useStoreNotes();
-const { selectedNote } = storeToRefs(storeNotes);
-
-const storeManageNoteModal = useStoreManageNoteModal();
-const { isUpdate, isOpen } = storeToRefs(storeManageNoteModal);
-const { openModal, closeModal } = storeManageNoteModal;
 
 const form = ref(null);
+
+const { openModal, closeModal } = useStoreManageNoteModal();
+const { isUpdate, isOpen } = storeToRefs(useStoreManageNoteModal());
+
+const { selectedNote } = storeToRefs(useStoreNotes());
 const note = selectedNote.value;
 
 const onSubmit = (e) => {
   const action = e.submitter.value;
 
-  const actions = {
-    add: onAdd,
-    update: onUpdate,
-  };
+  const actions = { onAdd, onUpdate};
 
   actions[action]();
 };
@@ -110,10 +106,10 @@ const onUpdate = () => {
               <a class="button" @click="onClose">Cancel</a>
             </p>
             <p class="control" v-if="!isUpdate">
-              <button class="button is-link" name="action" value="add">Add</button>
+              <button class="button is-link" name="action" value="onAdd">Add</button>
             </p>
             <p class="control" v-else>
-              <button class="button is-link" name="action" value="update">Update</button>
+              <button class="button is-link" name="action" value="onUpdate">Update</button>
             </p>
           </div>
         </footer>

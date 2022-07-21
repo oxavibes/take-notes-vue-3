@@ -2,9 +2,10 @@
 import { ref } from "vue";
 import { useStoreManageNoteModal } from "@/store";
 
+const showNavBar = ref(false);
+
 const { openModal } = useStoreManageNoteModal();
 
-const showNavBar = ref(false);
 </script>
 
 <template>
@@ -35,7 +36,7 @@ const showNavBar = ref(false);
           <div class="buttons">
             <div class="field is-grouped">
               <p class="control">
-                <button class="button" @click="openModal"><font-awesome-icon icon="fa-regular fa-square-plus" /></button>
+                <a class="button" @click="openModal"><font-awesome-icon icon="fa-regular fa-square-plus" /></a>
               </p>
             </div>
           </div>
