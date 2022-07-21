@@ -51,7 +51,7 @@ const onSubmit = () => {
                 <a class="button is-small" @click="closeModal">Cancel</a>
               </p>
               <p class="control">
-                <button class="button is-info is-small">Delete</button>
+                <button class="button is-dark is-small">Delete</button>
               </p>
             </div>
           </footer>

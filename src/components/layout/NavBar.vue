@@ -35,7 +35,7 @@ const { totalNotesCount } = storeToRefs(useStoreNotes());
     <div id="navbarBasic" class="navbar-menu" :class="showNavBar ? 'is-active' : ''">
       <div class="navbar-start ml-auto mr-0">
         <div class="navbar-item">
-          <span class="tag is-info is-medium">{{ totalNotesCount }}</span>
+          <span class="tag is-dark is-medium">{{ totalNotesCount }}</span>
         </div>
       </div>
 

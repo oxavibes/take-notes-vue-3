@@ -106,10 +106,10 @@ const onUpdate = () => {
               <a class="button is-small" @click="onClose">Cancel</a>
             </p>
             <p class="control" v-if="!isUpdate">
-              <button class="button is-info is-small" name="action" value="onAdd">Add</button>
+              <button class="button is-dark is-small" name="action" value="onAdd">Add</button>
             </p>
             <p class="control" v-else>
-              <button class="button is-info is-small" name="action" value="onUpdate">Update</button>
+              <button class="button is-dark is-small" name="action" value="onUpdate">Update</button>
             </p>
           </div>
         </footer>

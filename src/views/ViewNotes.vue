@@ -39,7 +39,7 @@ const tabletAndSmaller = breakpoints.smaller("desktop");
       </TransitionGroup>
 
       <Transition name="custom-classes" enter-active-class="animate__animated animate__fadeIn">
-        <p v-show="!notes.length" class="has-text-centered has-text-weight-semibold notification">No data to show</p>
+        <p v-show="!notes.length" class="box has-text-centered has-text-weight-semibold notification">No data to show</p>
       </Transition>
     </section>
   </div>
