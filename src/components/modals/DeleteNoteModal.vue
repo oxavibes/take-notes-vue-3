@@ -26,7 +26,9 @@ const onSubmit = () => {
 
   props.onDelete();
 
-  $toast.default("Note deleted successfully!");
+  $toast.default("Note deleted successfully!", {
+    queue: true,
+  });
 
   closeModal();
 };

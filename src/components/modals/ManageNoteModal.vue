@@ -43,7 +43,9 @@ const onAdd = () => {
 
   props.onAdd(Object.assign({}, selectedNote.value));
 
-  $toast.default("Note added successfully!");
+  $toast.default("Note added successfully!", {
+    queue: true,
+  });
 
   onClose();
 };
@@ -53,7 +55,9 @@ const onUpdate = () => {
 
   props.onUpdate(Object.assign({}, selectedNote.value));
 
-  $toast.default("Note updated successfully!");
+  $toast.default("Note updated successfully!", {
+    queue: true,
+  });
 
   onClose();
 };
