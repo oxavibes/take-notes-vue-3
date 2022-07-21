@@ -23,7 +23,7 @@ const storeDeleteNoteModal = useStoreDeleteNoteModal();
 const { closeModal } = storeDeleteNoteModal;
 const { isOpen } = storeToRefs(storeDeleteNoteModal);
 
-const onDelete = () => {
+const onSubmit = () => {
   const $toast = useToast();
 
   props.onDelete();
@@ -39,7 +39,7 @@ const onDelete = () => {
     <div class="modal" :class="isOpen ? 'is-active' : ''">
       <div class="modal-background"></div>
       <div class="modal-card">
-        <form>
+        <form @submit.prevent="onSubmit">
           <header class="modal-card-head">
             <p class="modal-card-title">{{ title }}</p>
             <a class="delete" aria-label="close" @click="closeModal"></a>
@@ -53,7 +53,7 @@ const onDelete = () => {
                 <a class="button" @click="closeModal">Cancel</a>
               </p>
               <p class="control">
-                <a class="button is-link" @click="onDelete">Delete</a>
+                <button class="button is-link">Delete</button>
               </p>
             </div>
           </footer>
@@ -70,5 +70,4 @@ const onDelete = () => {
     width: 450px;
   }
 }
-
 </style>

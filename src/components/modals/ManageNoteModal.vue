@@ -24,6 +24,17 @@ const { openModal, closeModal } = storeManageNoteModal;
 const form = ref(null);
 const note = selectedNote.value;
 
+const onSubmit = (e) => {
+  const action = e.submitter.value;
+
+  const actions = {
+    add: onAdd,
+    update: onUpdate,
+  };
+
+  actions[action]();
+};
+
 const onClose = () => {
   selectedNote.value.title = "";
   selectedNote.value.message = "";
@@ -38,7 +49,7 @@ const onAdd = () => {
 
   $toast.default("Note added successfully!");
 
-  onClose()
+  onClose();
 };
 
 const onUpdate = () => {
@@ -48,7 +59,7 @@ const onUpdate = () => {
 
   $toast.default("Note updated successfully!");
 
-  onClose()
+  onClose();
 };
 </script>
 
@@ -56,7 +67,7 @@ const onUpdate = () => {
   <div class="modal" :class="isOpen ? 'is-active' : ''">
     <div class="modal-background"></div>
     <div class="modal-card">
-      <form ref="form">
+      <form ref="form" @submit.prevent="onSubmit">
         <header class="modal-card-head">
           <p class="modal-card-title">Note details</p>
           <a class="delete" aria-label="close" @click="onClose"></a>
@@ -99,10 +110,10 @@ const onUpdate = () => {
               <a class="button" @click="onClose">Cancel</a>
             </p>
             <p class="control" v-if="!isUpdate">
-              <a class="button is-link" @click="onAdd">Add</a>
+              <button class="button is-link" name="action" value="add">Add</button>
             </p>
             <p class="control" v-else>
-              <a class="button is-link" @click="onUpdate">Update</a>
+              <button class="button is-link" name="action" value="update">Update</button>
             </p>
           </div>
         </footer>
